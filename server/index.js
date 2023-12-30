@@ -1,40 +1,51 @@
-require("@babel/core").transform("code", {
-    presets: ["@babel/preset-env"],
-});
-
+// Importing necessary packages
 import express, { json } from "express";
 import helmet from "helmet";
 import { set, connect } from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+import passport from 'passport';
+import session from 'express-session';
 
-import {
-    Images,
-    Restaurant,
-    Food,
-    Menu,
-    Review,
-    User,
-    Order,
-} from "./model/index.js";
+// Importing route handlers and Passport configuration
+import authRoute from "./controllers/Auth"
+import googleAuthConfig from "./config/google.config"
 
-/* CONFIGURATIONS */
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-const app = express();
+// Configuring environment variables
 dotenv.config();
-app.use(json());
-app.use(helmet());
-// app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-// app.use(morgan("common"));
-// app.use(bodyParser.json({ limit: "30mb", extended: true }));
-// app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
-// app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
-/* MONGOOSE SETUP */
+// Creating an Express app
+const app = express();
+
+// Adding middleware packages
+app.use(json()); // Parse incoming JSON requests
+app.use(helmet()); // Set security-related HTTP headers
+app.use(cors()); // Enable CORS for all routes
+
+// Configuring session middleware
+app.use(
+    session({
+      secret: 'your-secret-key', // Choose a strong and unique secret key
+      resave: false,
+      saveUninitialized: true,
+      cookie: {
+        secure: false, // Set to true if your site is served over HTTPS
+        maxAge: 24 * 60 * 60 * 1000, // Set the session to expire in 1 day (adjust as needed)
+      },
+    })
+);
+
+// Initializing Passport middleware
+app.use(passport.initialize());
+
+// Configuring Passport with Google OAuth
+googleAuthConfig(passport);
+
+// Adding route handlers
+app.use("/auth", authRoute);
+
+// Mongoose setup
 const PORT = process.env.PORT || 6001;
-
 app.listen(PORT, () => {
     // Setting strict mode for Mongoose queries
     set("strictQuery", true);
