@@ -6,13 +6,16 @@ import dotenv from "dotenv";
 import cors from "cors";
 import passport from 'passport';
 import session from 'express-session';
+dotenv.config();
+
+//Routes
+import { authRoute,foodRoute,imageRoute, restaurantRoute } from "./controllers";
+
 
 // Importing route handlers and Passport configuration
-import authRoute from "./controllers/Auth"
 import googleAuthConfig from "./config/google.config"
 
-// Configuring environment variables
-dotenv.config();
+
 
 // Creating an Express app
 const app = express();
@@ -43,6 +46,12 @@ googleAuthConfig(passport);
 
 // Adding route handlers
 app.use("/auth", authRoute);
+app.use("/image",imageRoute);
+app.use("/restaurant",restaurantRoute);
+app.use("/food",foodRoute)
+
+
+
 
 // Mongoose setup
 const PORT = process.env.PORT || 6001;

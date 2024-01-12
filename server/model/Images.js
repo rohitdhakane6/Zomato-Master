@@ -4,7 +4,11 @@ const imageSchema = new Schema({
         type: String,
         required: true,
       }],
-    });
+    },
+    {
+      timestamps:true
+    }
+    );
 
-const imagemodel = model("images", imageSchema);
-export default imagemodel;
+const images = model("images", imageSchema);
+export default images;
