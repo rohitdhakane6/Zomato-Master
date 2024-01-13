@@ -21,12 +21,7 @@ const MobileTabs = () => {
       id: "night",
       icon: <BiDrink />,
       name: "Night Life",
-    },
-    {
-      id: "nutri",
-      icon: <IoNutritionOutline />,
-      name: "Nutrition",
-    },
+    }
   ]);
 
   const { type } = useParams();
