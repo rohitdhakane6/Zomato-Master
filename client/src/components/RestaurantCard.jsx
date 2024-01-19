@@ -8,7 +8,7 @@ function RestaurantCard(props) {
   });
   return (
     <Link
-      to={`/restaurant/${props._id}`}
+      to={`/restaurant/${props._id}/overview`}
       className="w-full md:w-1/3 lg:w-1/4"
     >
       <div className="bg-white p-4 mb-4 w-full rounded-2xl transition duration-100 ease-in-out hover:shadow-lg cursor-pointer ">

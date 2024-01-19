@@ -8,8 +8,9 @@ import Navbar from "../components/Navbar";
 import ImageGrid from "../components/Restaurant/ImageGrid";
 import RestaurantInfo from "../components/Restaurant/RestaurantInfo";
 import InfoButton from "../components/Restaurant/InfoButton";
+import Tabs from "../components/Restaurant/Tabs";
 
-function RestaurantLayout() {
+function RestaurantLayout({children}) {
   const [restaurant, setrestaurant] = useState({
     images: [
       "https://b.zmtcdn.com/data/pictures/chains/8/6506108/7c8d1e6d9612e5bee0d54a39188e95a4.jpg",
@@ -46,6 +47,10 @@ function RestaurantLayout() {
             <RiShareForwardLine className="text-zomato-300" /> Share
           </InfoButton>
         </div>
+        <div className="my-10">
+          <Tabs/>
+        </div>
+        {children}
       </div>
     </>
   );
