@@ -3,11 +3,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 //HOC
 import HomeLayoutHOC from "./HOC/Home.hoc";
+import RestaurantLayoutHOC from "./HOC/Restaurant.hoc"; 
+
 
 //Pages
 import HomePage from "./pages/HomePage";
-import RestaurantLayoutHOC from "./HOC/Restaurant.hoc";
+
+//Components
 import Overview from "./components/Restaurant/Overview";
+import Menu from "./components/Restaurant/Menu";
 
 function App() {
   return (
@@ -37,7 +41,7 @@ function App() {
       <RestaurantLayoutHOC
         path="restaurant/:id/menu"
         exact
-        component={Overview}
+        component={Menu}
       />
     </>
   );

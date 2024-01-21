@@ -47,7 +47,7 @@ function RestaurantLayout({children}) {
             <RiShareForwardLine className="text-zomato-300" /> Share
           </InfoButton>
         </div>
-        <div className="my-10">
+        <div className="my-3">
           <Tabs/>
         </div>
         {children}
