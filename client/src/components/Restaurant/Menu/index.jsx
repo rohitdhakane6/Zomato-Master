@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import ImageViewer from "react-simple-image-viewer";
 
-function MenuCollection(props) {
-  console.log(props);
-
+function Menu(props) {
+  const [menuImages, setMenuImages] = useState({
+    images: [
+      "https://b.zmtcdn.com/data/menus/016/18350016/ad68cedc32c3b4d592eefa8a3339d04f.jpg",
+    ],
+  });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const closeViewer = () => setIsMenuOpen(false);
@@ -12,7 +15,7 @@ function MenuCollection(props) {
     <>
       {isMenuOpen && (
         <ImageViewer
-          src={props.image.images}
+          src={menuImages.images}
           currentIndex={currentImage}
           displayScroll={false}
           onClose={closeViewer}
@@ -24,18 +27,18 @@ function MenuCollection(props) {
       >
         <div className="w-full h-full overflow-hidden rounded-lg">
           <img
-            src={props.image.images[0]}
+            src={menuImages.images[0]}
             alt="menu"
             className="w-full h-full transform transition duration-400 rounded-lg hover:scale-110"
           />
         </div>
         <div>
-          <strong>{props.menuTitle}</strong>
-          <p>{props.pages} Pages</p>
+          <strong className="font-medium">Menu</strong>
+          <p>{menuImages.images.length} Pages</p>
         </div>
       </div>
     </>
   );
 }
 
-export default MenuCollection;
+export default Menu;
