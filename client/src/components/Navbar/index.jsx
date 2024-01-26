@@ -37,7 +37,7 @@ const MobileNav = () => {
               <div className="absolute py-3 -bottom-14 -right-4  z-20 flex flex-col gap-2">
                 <button
                   type="button"
-                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 me-4 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 me-4 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                 >
                   Sign Out
                 </button>
@@ -56,13 +56,13 @@ const MobileNav = () => {
               <div className="absolute  py-3 -bottom-28 -right-5 z-20 flex flex-col gap-2">
                 <button
                   type="button"
-                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 me-5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 me-5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                 >
                   Sign In
                 </button>
                 <button
                   type="button"
-                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 me-5  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 me-5  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                 >
                   Sign Up
                 </button>
@@ -125,7 +125,7 @@ const LargeNav = () => {
                 <div className="absolute  py-3 -bottom-16 -right-4  z-20 flex flex-col gap-2">
                   <button
                     type="button"
-                    class=" w-full h-full focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 me-4 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    className=" w-full h-full focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 me-4 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                   >
                     Sign Out
                   </button>
@@ -136,13 +136,13 @@ const LargeNav = () => {
             <div className=" flex gap-4">
               <button
                 type="button"
-                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 me-5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 me-5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
               >
                 Login
               </button>
               <button
                 type="button"
-                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 me-5  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 me-5  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
               >
                 Sign Up
               </button>
