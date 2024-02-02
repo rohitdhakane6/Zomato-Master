@@ -5,6 +5,9 @@ function Menu(props) {
   const [menuImages, setMenuImages] = useState({
     images: [
       "https://b.zmtcdn.com/data/menus/016/18350016/ad68cedc32c3b4d592eefa8a3339d04f.jpg",
+      "https://b.zmtcdn.com/data/menus/506/19119506/2d28e4999d61f37c8a19e852284abfbf.jpg",
+      "https://b.zmtcdn.com/data/menus/506/19119506/57f429b03c18238a20e583aaaf247834.jpg",
+      "https://b.zmtcdn.com/data/menus/506/19119506/5deb7f5c08dd9c554fe86d4e2fa0a782.jpg",
     ],
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);

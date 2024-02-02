@@ -7,7 +7,7 @@ import Slider from "react-slick";
 // components
 import { NextArrow, PrevArrow } from "../CarouselArrow";
 import SimilarRestaurantCard from "./SimilarRestaurantCard";
-import ReviewCard from "./Reviews";
+import ReviewCard from "./Reviews/ReviewCard.jsx";
 import Menu from "./Menu";
 import MapView from "./MapView";
 // import MapView from "./MapView";

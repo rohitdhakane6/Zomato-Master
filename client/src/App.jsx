@@ -13,6 +13,8 @@ import HomePage from "./pages/HomePage";
 import Overview from "./components/Restaurant/Overview";
 import Menu from "./components/Restaurant/Menu";
 import OrderOnline from "./components/Restaurant/OrderOnline";
+import Reviews from "./components/Restaurant/Reviews/Reviews";
+import Photos from "./components/Restaurant/Photos/Photos";
 
 function App() {
   return (
@@ -32,12 +34,12 @@ function App() {
       <RestaurantLayoutHOC
         path="restaurant/:id/reviews"
         exact
-        component={Overview}
+        component={Reviews}
       />
       <RestaurantLayoutHOC
         path="restaurant/:id/photos"
         exact
-        component={Overview}
+        component={Photos}
       />
       <RestaurantLayoutHOC
         path="restaurant/:id/menu"
