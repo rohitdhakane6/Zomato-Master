@@ -59,6 +59,13 @@ function Overview() {
           slidesToScroll: 1,
         },
       },
+      {
+        breakpoint: 650,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
     ],
   };
 

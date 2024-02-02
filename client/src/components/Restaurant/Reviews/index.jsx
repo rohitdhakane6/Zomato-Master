@@ -7,7 +7,6 @@ dayjs.extend(relativeTime);
 
 function ReviewCard(props) {
   const [user, setUser] = useState("");
-  console.log(props);
   return (
     <>
       <div className="my-3 flex flex-col gap-1 border-b border-gray-300 p-4">
