@@ -9,8 +9,9 @@ import ImageGrid from "../components/Restaurant/ImageGrid";
 import RestaurantInfo from "../components/Restaurant/RestaurantInfo";
 import InfoButton from "../components/Restaurant/InfoButton";
 import Tabs from "../components/Restaurant/Tabs";
+import CartContainer from "../components/cart/cartContainer";
 
-function RestaurantLayout({children}) {
+function RestaurantLayout({ children }) {
   const [restaurant, setrestaurant] = useState({
     images: [
       "https://b.zmtcdn.com/data/pictures/chains/8/6506108/7c8d1e6d9612e5bee0d54a39188e95a4.jpg",
@@ -48,10 +49,11 @@ function RestaurantLayout({children}) {
           </InfoButton>
         </div>
         <div className="my-3">
-          <Tabs/>
+          <Tabs />
         </div>
         {children}
       </div>
+      <CartContainer />
     </>
   );
 }

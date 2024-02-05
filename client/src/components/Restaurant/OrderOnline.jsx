@@ -154,6 +154,11 @@ function OrderOnline() {
           </section>
         </div>
       </div>
+      <FloatMenuBtn
+        menu={menu}
+        onClickHandler={onClickHandler}
+        selected={selected}
+      />
     </>
   );
 }
