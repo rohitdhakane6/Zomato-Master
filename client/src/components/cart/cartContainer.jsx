@@ -5,7 +5,7 @@ import {
   IoMdArrowDropup,
 } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // component
 import FoodItem from "./FoodItem";
@@ -22,9 +22,11 @@ function CartSM({ toggle }) {
             $300 <sub>(plus tax)</sub>
           </h4>
         </div>
-        <button className="flex items-cetenr gap-1 bg-zomato-400 px-3 py-1 text-white rounded-lg right-32 relative">
-          Continue <IoMdArrowDropright />
-        </button>
+        <Link to="/checkout/orders">
+          <button className="flex items-cetenr gap-1 bg-zomato-400 px-3 py-1 text-white rounded-lg right-32 relative">
+            Continue <IoMdArrowDropright />
+          </button>
+        </Link>
       </div>
     </>
   );
@@ -42,9 +44,12 @@ function CartLG({ toggle }) {
             $300 <sub>(plus tax)</sub>
           </h4>
         </div>
-        <button className="flex items-center gap-1 bg-zomato-400 px-3 py-1 text-white rounded-lg">
-          Continue <IoMdArrowDropright />
-        </button>
+        <Link to="/checkout/orders">
+          {" "}
+          <button className="flex items-center gap-1 bg-zomato-400 px-3 py-1 text-white rounded-lg">
+            Continue <IoMdArrowDropright />
+          </button>
+        </Link>
       </div>
     </>
   );

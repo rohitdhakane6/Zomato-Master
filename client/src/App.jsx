@@ -3,12 +3,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 //HOC
 import HomeLayoutHOC from "./HOC/Home.hoc";
-import RestaurantLayoutHOC from "./HOC/Restaurant.hoc"; 
-
-
+import RestaurantLayoutHOC from "./HOC/Restaurant.hoc";
+import Checkoutlayouthoc from "./HOC/Checkout.hoc";
 //Pages
 import HomePage from "./pages/HomePage";
-
+import CheckoutPage from "./pages/CheckoutPage";
 //Components
 import Overview from "./components/Restaurant/Overview";
 import Menu from "./components/Restaurant/Menu";
@@ -41,11 +40,8 @@ function App() {
         exact
         component={Photos}
       />
-      <RestaurantLayoutHOC
-        path="restaurant/:id/menu"
-        exact
-        component={Menu}
-      />
+      <RestaurantLayoutHOC path="restaurant/:id/menu" exact component={Menu} />
+      <Checkoutlayouthoc path="/checkout/orders" exact component={CheckoutPage}  />
     </>
   );
 }
