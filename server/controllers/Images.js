@@ -33,4 +33,19 @@ router.post("/", upload.single("file"), async (req, res) => {
     }
 })
 
+router.get("/:_id", async (req, res) => {
+    try {
+        const { _id } = req.params;
+        const image = await images.findById(_id);
+
+        if (!image) {
+            return res.status(404).json({ error: "No Image Found with This ID" });
+        }
+
+        return res.status(200).json({ image });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: error.message });
+    }
+});
 export default router;
