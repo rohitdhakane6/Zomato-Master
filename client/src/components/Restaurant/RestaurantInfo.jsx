@@ -19,7 +19,7 @@ function RestaurantInfo(props) {
             </div>
             <div className="flex items-center gap-2">
               <span className="flex rounded items-center gap-1 text-white font-medium bg-green-600 px-2 py-1">
-                {props.deliverytating} <TiStarFullOutline />
+                {props.deliveryRating} <TiStarFullOutline />
               </span>
               <span>
                 <strong>200</strong>
