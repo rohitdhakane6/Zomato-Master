@@ -1,57 +1,32 @@
-import { Schema, model } from 'mongoose';
+import mongoose from "mongoose";
 
-const FoodSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 50,
+const FoodSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    descript: { type: String, required: true },
+    isVeg: { type: Boolean, required: true },
+    isContainsEgg: { type: Boolean, required: true },
+    category: { type: String, required: true },
+    photos: {
+      type: mongoose.Types.ObjectId,
+      ref: "Images",
+    },
+    price: { type: Number, default: 150, required: true },
+    addOns: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Foods",
+      },
+    ],
+    restaurant: {
+      type: mongoose.Types.ObjectId,
+      ref: "Restaurants",
+      required: true,
+    },
   },
-  category: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 50,
-  },
-  description: {
-    type: String,
-    maxlength: 255,
-  },
-  ingredients: [{
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 50,
-  }],
-  price: {
-    type: Number,
-    required: true,
-    min: 0,
-  },
-  isVegetarian: {
-    type: Boolean,
-    default: false,
-  },
-  // Reference to the Images collection
-  images: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Images',
-  }],
-  restaurant: {
-    type: Schema.Types.ObjectId,
-    ref: 'Restaurant',
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
-const Food = model('Food', FoodSchema);
-
-export default Food;
+export const Food = mongoose.model("Foods", FoodSchema);

@@ -9,7 +9,7 @@ import session from 'express-session';
 dotenv.config();
 
 //Routes
-import { authRoute,foodRoute,imageRoute, restaurantRoute } from "./controllers";
+import {ReviewRoute, authRoute,foodRoute,imageRoute, restaurantRoute } from "./controllers";
 
 
 // Importing route handlers and Passport configuration
@@ -49,6 +49,7 @@ app.use("/auth", authRoute);
 app.use("/image",imageRoute);
 app.use("/restaurant",restaurantRoute);
 app.use("/food",foodRoute)
+app.use("/reviews",ReviewRoute)
 
 
 
