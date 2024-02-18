@@ -1,19 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import ImageViewer from "react-simple-image-viewer";
+import { fetchImageURL } from "../../../app/store";
 
-function Menu(props) {
+function Menu() {
+  const dispatch = useDispatch();
+  const restaurant = useSelector((state) => state.restaurant.restaurantdata);
   const [menuImages, setMenuImages] = useState({
-    images: [
-      "https://b.zmtcdn.com/data/menus/016/18350016/ad68cedc32c3b4d592eefa8a3339d04f.jpg",
-      "https://b.zmtcdn.com/data/menus/506/19119506/2d28e4999d61f37c8a19e852284abfbf.jpg",
-      "https://b.zmtcdn.com/data/menus/506/19119506/57f429b03c18238a20e583aaaf247834.jpg",
-      "https://b.zmtcdn.com/data/menus/506/19119506/5deb7f5c08dd9c554fe86d4e2fa0a782.jpg",
-    ],
+    images: [],
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const fetchMenuImages = async () => {
+      try {
+        const data = await dispatch(fetchImageURL(restaurant.menuImages));
+        const images = data.payload.image.images.map(({ location }) => location);
+        console.log(images);
+        setMenuImages((prev) => ({
+          ...prev,
+          images: images,
+        }));
+      } catch (error) {
+        console.error("Error fetching menu images:", error);
+      }
+    };
+
+    fetchMenuImages();
+  }, [ ]);
+
   const closeViewer = () => setIsMenuOpen(false);
   const openViewer = () => setIsMenuOpen(true);
+
   return (
     <>
       {isMenuOpen && (
@@ -25,8 +45,9 @@ function Menu(props) {
         />
       )}
       <div
-        className="w-32 h-32 md:w-48 flex flex-col md:h-48"
+        className="w-full md:w-48 flex flex-col"
         onClick={openViewer}
+        style={{ maxWidth: "12rem" }}
       >
         <div className="w-full h-full overflow-hidden rounded-lg">
           <img

@@ -25,7 +25,6 @@ function RestaurantLayout({ children }) {
     restaurantRating: 4.1,
     deliveryRating: 3.2,
   });
-  console.log(restaurant.address);
   const dispatch = useDispatch();
   const { status: restaurantByIdStatus, error: restaurantByIdError } =
     useSelector((state) => state.restaurant.fetchRestaurantByID);

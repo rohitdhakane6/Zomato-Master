@@ -1,58 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+//Component
 import DiningCarousel from "./DiningCarousel";
 import RestaurantCard from "../RestaurantCard";
 
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+
 function Dining() {
-  const [ResturntList, setResturntList] = useState([
-    {
-      _id: "123",
-      images: [
-        "https://b.zmtcdn.com/data/pictures/chains/8/6506108/a6c8129329bf976270361b45058f110b_o2_featured_v2.jpg?output-format=webp",
-      ],
-      name: "Pizza",
-      cuisine: ["xyz"],
-      isPro: false,
-      isOff: true,
-      restaurantReviewValue: 3.4,
-      averageCost: 45,
-    },
-    {
-      _id: "123",
-      images: [
-        "https://b.zmtcdn.com/data/pictures/chains/8/6506108/a6c8129329bf976270361b45058f110b_o2_featured_v2.jpg?output-format=webp",
-      ],
-      name: "Pizza",
-      cuisine: ["xyz"],
-      isPro: false,
-      isOff: true,
-      restaurantReviewValue: 3.4,
-      averageCost: 45,
-    },
-    {
-      _id: "123",
-      images: [
-        "https://b.zmtcdn.com/data/pictures/chains/8/6506108/a6c8129329bf976270361b45058f110b_o2_featured_v2.jpg?output-format=webp",
-      ],
-      name: "Pizza",
-      cuisine: ["xyz"],
-      isPro: false,
-      isOff: true,
-      restaurantReviewValue: 3.4,
-      averageCost: 45,
-    },
-    {
-      _id: "123",
-      images: [
-        "https://b.zmtcdn.com/data/pictures/chains/8/6506108/a6c8129329bf976270361b45058f110b_o2_featured_v2.jpg?output-format=webp",
-      ],
-      name: "Pizza",
-      cuisine: ["xyz"],
-      isPro: false,
-      isOff: true,
-      restaurantReviewValue: 3.4,
-      averageCost: 45,
-    },
-  ]);
+  const dispatch = useDispatch();
+  const [ResturntList, setRestaurantList] = useState([]);
+  const Resturants = useSelector((state) => state.restaurant.restaurants);
+
+  useEffect(() => {
+    Resturants.restaurants && setRestaurantList(Resturants.restaurants);
+  }, [Resturants.restaurants]);
   return (
     <div className="mb-10">
       <h1 className="text-xl text-gray-700 my-4 md:my-8 md:text-3xl md:font-semibold">

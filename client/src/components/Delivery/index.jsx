@@ -11,7 +11,6 @@ function Delivery() {
   const dispatch = useDispatch();
   const [ResturntList, setRestaurantList] = useState([]);
   const Resturants = useSelector((state) => state.restaurant.restaurants);
-  console.log(Resturants);
 
   useEffect(() => {
     Resturants.restaurants && setRestaurantList(Resturants.restaurants);

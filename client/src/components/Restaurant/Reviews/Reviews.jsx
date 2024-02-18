@@ -7,48 +7,22 @@ import React, { useState, useEffect } from "react";
 // components
 import ReviewCard from "./ReviewCard.jsx";
 import AddReviewCard from "./AddReviewCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getReviews } from "../../../app/store.js";
 
 function Reviews() {
-    const [reviews, setReviews] = useState([
-        {
-          reviewer: "John Doe",
-          isResturantReview: false,
-          createdAt: "2024-01-01",
-          rating: 4.5,
-          review:
-            "Great food and friendly service. The atmosphere is cozy, and I loved the variety of dishes on the menu.",
-        },
-        {
-          reviewer: "Jane Smith",
-          isResturantReview: false,
-          createdAt: "2024-01-01",
-          rating: 3.2,
-          review:
-            "Decent experience. The service was a bit slow, but the food was tasty. Prices were reasonable.",
-        },
-        {
-          reviewer: "Bob Johnson",
-          isResturantReview: false,
-          createdAt: "2024-01-01",
-          rating: 5.0,
-          review:
-            "Outstanding! The best restaurant in town. The staff is attentive, and the chef's specials are always a delight.",
-        },
-        // Add more reviews as needed
-      ]);
-//   const dispatch = useDispatch();
+  const [reviews, setReviews] = useState([]);
+    const dispatch = useDispatch();
 
-//   const reduxState = useSelector(
-//     (globalState) => globalState.restaurant.selectedRestaurant.restaurant
-//   );
+    const restaurant = useSelector((state) => state.restaurant.restaurantdata);
 
-//   useEffect(() => {
-//     if (reduxState) {
-//       dispatch(getReviews(reduxState?._id)).then((data) => {
-//         setReviews(data.payload.reviews);
-//       });
-//     }
-//   }, [reduxState]);
+    useEffect(() => {
+      if (restaurant) {
+        dispatch(getReviews(restaurant?._id)).then((data) => {
+          setReviews(data.payload.reviews);
+        });
+      }
+    }, [restaurant]);
 
   return (
     <>
