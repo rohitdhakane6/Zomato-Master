@@ -18,7 +18,6 @@ function Menu() {
       try {
         const data = await dispatch(fetchImageURL(restaurant.menuImages));
         const images = data.payload.image.images.map(({ location }) => location);
-        console.log(images);
         setMenuImages((prev) => ({
           ...prev,
           images: images,

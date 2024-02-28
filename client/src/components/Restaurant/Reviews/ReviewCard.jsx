@@ -1,12 +1,22 @@
-import React, { useState } from "react";
-import relativeTime from "dayjs/plugin/relativeTime"; 
+import React, { useEffect, useState } from "react";
+import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import { TiStarFullOutline } from "react-icons/ti";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../../features/User/UserSlices";
 // Extend dayjs with the relativeTime plugin
 dayjs.extend(relativeTime);
 
+//Redux
 function ReviewCard(props) {
-  const [user, setUser] = useState("");
+  const dispatch = useDispatch();
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    dispatch(getUser(props.user)).then((data) => {
+      setUser(data.payload.user.fullName);
+    });
+  }, []);
   return (
     <>
       <div className="my-3 flex flex-col gap-1 border-b border-gray-300 p-4">
@@ -20,7 +30,7 @@ function ReviewCard(props) {
               />
             </div>
             <div className="flex flex-col">
-              <h3 className="text-lg font-semibold">{props.reviewer}</h3>
+              <h3 className="text-lg font-semibold">{user}</h3>
               <small className="text-gray-500">
                 5 Reviews &#8226; 3 Followers
               </small>
@@ -44,7 +54,7 @@ function ReviewCard(props) {
           </div>
           <div className="w-full ">
             <p className="w-full text-gray-600 font-light text-base">
-              {props.review}
+              {props.reviewText}
             </p>
           </div>
         </div>
