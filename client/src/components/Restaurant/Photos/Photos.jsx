@@ -1,19 +1,40 @@
 import React, { useState, useEffect } from "react";
 import ImageViewer from "react-simple-image-viewer";
-
+import { useDispatch, useSelector } from "react-redux";
 
 // component
 import PhotoCollection from "./PhotoCollection.jsx";
+import { fetchImageURL } from "../../../app/store.js";
 
 function Photos() {
-    const [photos] = useState([
-        "https://b.zmtcdn.com/data/pictures/chains/1/19490811/d1b9d5fa9d2d5563debeca8b1df9834c.jpg",
-        "https://b.zmtcdn.com/data/pictures/chains/1/19490811/bf50a02d59e276a70b9490901e24d7e4.jpg",
-        "https://b.zmtcdn.com/data/pictures/chains/8/378/898f269f6704a7ef3f787489fe1e5109.jpg",
-        "https://b.zmtcdn.com/data/pictures/chains/8/378/285ed4164c2fdebbd3dcf15422b1d210.jpg",
-        "https://b.zmtcdn.com/data/pictures/chains/8/378/1d5abbb32f170b6ac114f0f191a30827.jpg",
-        "https://b.zmtcdn.com/data/pictures/chains/8/378/b8e14bd3f1a5f406d843e9cbf3f10e2c.jpg",
-      ]);
+  const restaurant = useSelector((state) => state.restaurant.restaurantdata);
+  // console.log(restaurant.photos);
+  const dispatch = useDispatch();
+  const [photos, setPhotos] = useState({
+    images: [
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+    ],
+  });
+
+  console.log(photos);
+  useEffect(() => {
+    dispatch(fetchImageURL(restaurant.photos))
+      .then((data) => {
+        const imageUrls = data.payload.image.images.map(
+          (image) => image.location
+        );
+        setPhotos({
+          images: imageUrls,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching image URLs:", error);
+      });
+  }, [dispatch, restaurant.photos]);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -24,7 +45,7 @@ function Photos() {
     <>
       {isMenuOpen && (
         <ImageViewer
-          src={photos}
+          src={photos?.images}
           currentIndex={currentImage}
           disableScroll={false}
           onClose={closeViewer}
@@ -32,15 +53,16 @@ function Photos() {
       )}
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {photos.map((photo, index) => (
-          <PhotoCollection
-            key={index}
-            openViewer={openViewer}
-            index={index}
-            image={photo}
-            setCurrentImage={setCurrentImage}
-          />
-        ))}
+        {photos.images.length > 0 &&
+          photos?.images?.map((photo, index) => (
+            <PhotoCollection
+              key={index}
+              openViewer={openViewer}
+              index={index}
+              image={photo}
+              setCurrentImage={setCurrentImage}
+            />
+          ))}
       </div>
     </>
   );
