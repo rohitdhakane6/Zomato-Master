@@ -16,9 +16,18 @@ import CartContainer from "../components/cart/cartContainer";
 import { useParams } from "react-router-dom";
 
 function RestaurantLayout({ children }) {
-  const {id}=useParams()
+  const { id } = useParams();
   const [restaurant, setRestaurant] = useState({
-    images: [],
+    images: [
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+    ],
     name: "",
     cuisine: "",
     address: "",
@@ -44,9 +53,8 @@ function RestaurantLayout({ children }) {
         }));
       });
     });
-
   }, []);
-    
+
   if (restaurantByIdStatus === "loading") {
     return <p>Loading...</p>;
   }
