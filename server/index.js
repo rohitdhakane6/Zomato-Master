@@ -9,7 +9,7 @@ import session from 'express-session';
 dotenv.config();
 
 //Routes
-import {ReviewRoute, UserRoute, authRoute,foodRoute,imageRoute, restaurantRoute } from "./controllers";
+import {ReviewRoute, UserRoute, authRoute,foodRoute,imageRoute, restaurantRoute ,MenuRoute, FoodRoute } from "./controllers";
 
 
 // Importing route handlers and Passport configuration
@@ -51,7 +51,8 @@ app.use("/restaurant",restaurantRoute);
 app.use("/food",foodRoute)
 app.use("/reviews",ReviewRoute)
 app.use("/user",UserRoute)
-
+app.use("/menu",MenuRoute)
+app.use("/food",FoodRoute)
 
 
 // Mongoose setup

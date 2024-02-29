@@ -1,69 +1,73 @@
-import { Router } from "express";
-import Food from "../model/Food";
+// Libraties
+import express from "express";
 
-const router = Router();
+// Database modal
+import {Food} from "../model/Food";
 
-/** Route: /r/:_id
- * Description: Get all food by restaurant id
- * Params: None
- * Query: city
- * Example: /r/1234
+
+
+const Router = express.Router();
+
+/**
+ * Route        /:_id
+ * Des          GET food based on id
+ * Params       _id
+ * Access       Public
+ * Method       GET
  */
-router.get("/r/:_id", async (req, res) => {
+Router.get("/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
-    const food = await Food.find({ restaurant: _id });
-
-    if (food.length === 0) {
-      return res.status(400).json({ error: "No Food Found" });
-    }
-
-    return res.status(201).json({ food, status: "success" });
+    const foods = await Food.findById(_id);
+    return res.json({ foods });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 });
 
-/** Route: /c/:category
- * Description: Get food by category
- * Params: category (Food category)
- * Example: /c/pizza
+/**
+ * Route        /r/:_id
+ * Des          GET all food based on particular restaurant
+ * Params       none
+ * Access       Public
+ * Method       GET
  */
-router.get("/c/:category", async (req, res) => {
+Router.get("/r/:_id", async (req, res) => {
   try {
+    // await validateId(req.params);
+    const { _id } = req.params;
+    const foods = await Food.find({ restaurant: _id });
+
+    return res.json({ foods });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * Route        /c/:category
+ * Des          GET all food based on particular category
+ * Params       none
+ * Access       Public
+ * Method       GET
+ */
+Router.get("/c/:category", async (req, res) => {
+  try {
+    // validateCategory(req.params);
     const { category } = req.params;
-    const food = await Food.find({
+    const foods = await Food.find({
       category: { $regex: category, $options: "i" },
     });
 
-    return res.status(201).json({ food });
+    if (!foods)
+      return res
+        .status(404)
+        .json({ error: `No food matched with ${category}` });
+
+    return res.json({ foods });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ error: error.message });
   }
 });
 
-/** Route: /search/:searchString
- * Description: Search for food by name
- * Params: searchString (Search keyword)
- * Example: /resturant/search/pizza
- */
-router.get("/search/:searchString", async (req, res) => {
-  try {
-    const { searchString } = req.params;
-    const food = await Food.find({
-      name: { $regex: searchString, $options: "i" },
-    });
-
-    if (!food || food.length === 0) {
-      return res.status(400).json({ error: `No food Found for ${searchString}` });
-    }
-
-    return res.status(201).json({ food });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: error.message });
-  }
-});
-
-export default router;
+export default Router;
