@@ -14,7 +14,7 @@ import {ReviewRoute, UserRoute, authRoute,foodRoute,imageRoute, restaurantRoute 
 
 // Importing route handlers and Passport configuration
 import googleAuthConfig from "./config/google.config"
-
+import configureJwtStrategy from "./config/route.config"
 
 
 // Creating an Express app
@@ -43,6 +43,7 @@ app.use(passport.initialize());
 
 // Configuring Passport with Google OAuth
 googleAuthConfig(passport);
+configureJwtStrategy(passport);
 
 // Adding route handlers
 app.use("/auth", authRoute);
