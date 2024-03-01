@@ -43,7 +43,7 @@ function RestaurantLayout({ children }) {
       setRestaurant((prev) => ({
         ...prev,
         ...data.payload,
-      }));
+      }),[id]);
 
       dispatch(fetchImageURL(data.payload.photos)).then((data) => {
         // console.log(data);
