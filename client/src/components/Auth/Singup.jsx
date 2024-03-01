@@ -25,10 +25,14 @@ export default function Signup({ isOpen, setIsOpen }) {
       // Check if there is an error in the payload
       if (actionResult.payload && actionResult.payload.error) {
         // Display an error toast notification
-        toast.error(actionResult.payload.error);
+        toast.error(actionResult.payload.error,{
+          position: "top-center"
+        });
       } else {
         // Close the modal after successful submission
-        toast.success("Signup successful");
+        toast.success("Signup successful",{
+          position: "top-center"
+        });
         closeModal();
       }
     } catch (error) {
@@ -50,7 +54,7 @@ export default function Signup({ isOpen, setIsOpen }) {
 
   return (
     <>
-      <ToastContainer />
+   
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -81,6 +85,7 @@ export default function Signup({ isOpen, setIsOpen }) {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   ></Dialog.Title>
+                  <ToastContainer />
                   <div className="mt-2 flex flex-col gap-3 w-full">
                     <button
                       className="py-2 justify-center rounded-lg flex items-center gap-2 w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100"

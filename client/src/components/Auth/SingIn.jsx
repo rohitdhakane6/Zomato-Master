@@ -23,10 +23,14 @@ const SignIn = ({ isOpen, setIsOpen }) => {
       // Check if there is an error in the payload
       if (actionResult.payload && actionResult.payload.error) {
         // Display an error toast notification
-        toast.error(`${actionResult.payload.error}`);
+        toast.error(`${actionResult.payload.error}`, {
+          position: "top-center",
+        });
       } else {
         // Close the modal after successful submission
-        toast.success('Login successful');
+        toast.success("Login successful",{
+          position: "top-center"
+        });
         closeModal();
       }
     } catch (error) {
@@ -48,7 +52,6 @@ const SignIn = ({ isOpen, setIsOpen }) => {
 
   return (
     <>
-      <ToastContainer />
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -78,7 +81,10 @@ const SignIn = ({ isOpen, setIsOpen }) => {
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
-                  ></Dialog.Title>
+                  >
+                    <ToastContainer />
+                  </Dialog.Title>
+
                   <div className="mt-2 flex flex-col gap-3 w-full">
                     <button
                       className="py-2 justify-center rounded-lg flex items-center gap-2 w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100"
@@ -96,6 +102,7 @@ const SignIn = ({ isOpen, setIsOpen }) => {
                           onChange={handleChange}
                           placeholder="user@gmail.com"
                           className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:border-zomato-400"
+                          required
                         />
                       </div>
                       <div className="w-full flex flex-col gap-2">
@@ -107,6 +114,7 @@ const SignIn = ({ isOpen, setIsOpen }) => {
                           onChange={handleChange}
                           placeholder="Enter your password"
                           className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:border-zomato-400"
+                          required
                         />
                       </div>
                     </form>
