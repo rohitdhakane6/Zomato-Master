@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { AiOutlinePlus } from "react-icons/ai";
-//redux
-import { useDispatch } from "react-redux";
+// redux
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart, fetchImageURL, getfood } from "../../../app/store";
 
 function FoodItem(props) {
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
   const [food, setFood] = useState({
     name: "",
-    image:
-      "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
+    image: "https://iconicentertainment.in/wp-content/uploads/2013/11/dummy-image-square.jpg",
     isAddedToCart: false,
     rating: 0,
     description: "",
@@ -18,55 +18,59 @@ function FoodItem(props) {
   });
 
   useEffect(() => {
-    const fetchData = () => {
-      if (props.item) {
-        dispatch(getfood(props.item))
-          .then((response) => {
-            const imageId = response.payload.photos;
+    const fetchData = async () => {
+      try {
+        if (props.item) {
+          const response = await dispatch(getfood(props.item));
+          const imageId = response.payload.photos;
 
-            if (imageId) {
-              dispatch(fetchImageURL(imageId))
-                .then((imageResponse) => {
-                  if (
-                    imageResponse.payload &&
-                    imageResponse.payload.image &&
-                    imageResponse.payload.image.images &&
-                    imageResponse.payload.image.images.length > 0
-                  ) {
-                    const imageUrl =
-                      imageResponse.payload.image.images[0].location;
+          if (imageId) {
+            const imageResponse = await dispatch(fetchImageURL(imageId));
 
-                    setFood((prevFood) => ({
-                      ...prevFood,
-                      image: imageUrl,
-                      ...response.payload,
-                    }));
-                  } else {
-                    console.error("Invalid image data format");
-                  }
-                })
-                .catch((error) => {
-                  console.error("Error fetching image:", error);
-                });
-            } else {
-              // Set remaining data if imageId is not present
+            if (
+              imageResponse.payload &&
+              imageResponse.payload.image &&
+              imageResponse.payload.image.images &&
+              imageResponse.payload.image.images.length > 0
+            ) {
+              const imageUrl = imageResponse.payload.image.images[0].location;
+
               setFood((prevFood) => ({
                 ...prevFood,
+                image: imageUrl,
                 ...response.payload,
               }));
+            } else {
+              console.error("Invalid image data format");
             }
-          })
-          .catch((error) => {
-            console.error("Error fetching food list:", error);
-          });
+          } else {
+            // Set remaining data if imageId is not present
+            setFood((prevFood) => ({
+              ...prevFood,
+              ...response.payload,
+            }));
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching food details:", error);
       }
     };
 
     fetchData();
   }, [props.item]);
 
+  useEffect(() => {
+    // Check if the current food item is in the cart
+    const isInCart = cartItems.some((item) => item.food._id === props.item);
+    
+    // Update isAddedToCart accordingly
+    setFood((prevFood) => ({
+      ...prevFood,
+      isAddedToCart: isInCart,
+    }));
+  }, [cartItems, props.item]);
+
   const AddToCartHandle = () => {
-    console.log(food);
     dispatch(
       addToCart({
         food: food,
@@ -74,6 +78,7 @@ function FoodItem(props) {
         totalPrice: food.price,
       })
     );
+
     setFood((prev) => ({ ...prev, isAddedToCart: true }));
   };
 

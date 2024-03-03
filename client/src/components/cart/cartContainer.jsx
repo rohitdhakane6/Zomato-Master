@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IoMdArrowDropdown,
   IoMdArrowDropright,
@@ -12,16 +12,16 @@ import { UseDispatch, useSelector } from "react-redux";
 // component
 import FoodItem from "./FoodItem";
 
-function CartSM({ toggle }) {
+function CartSM({ toggle, totalItems, totalPrice }) {
   return (
     <>
       <div className="md:hidden flex items-center justify-between">
         <div className="flex flex-col items-start">
           <small className="flex items-cetner gap-1" onClick={toggle}>
-            1 Item <IoMdArrowDropup />
+            {totalItems} Item <IoMdArrowDropup />
           </small>
           <h4>
-            Rs. 300 <sub>(plus tax)</sub>
+            Rs. {totalPrice} <sub>(plus tax)</sub>
           </h4>
         </div>
         <Link to="/checkout/orders">
@@ -34,16 +34,16 @@ function CartSM({ toggle }) {
   );
 }
 
-function CartLG({ toggle }) {
+function CartLG({ toggle, totalItems, totalPrice }) {
   return (
     <>
       <div className="hidden md:flex items-center justify-between">
         <div className="flex flex-col items-start">
           <small className="flex items-center gap-1" onClick={toggle}>
-            1 Item <IoMdArrowDropup className="cursor-pointer" />
+            {totalItems} Item <IoMdArrowDropup className="cursor-pointer" />
           </small>
           <h4>
-            Rs. 300 <sub>(plus tax)</sub>
+            Rs. {totalPrice} <sub>(plus tax)</sub>
           </h4>
         </div>
         <Link to="/checkout/orders">
@@ -59,28 +59,22 @@ function CartLG({ toggle }) {
 function CartContainer() {
   const [isOpen, setIsOpen] = useState(false);
   const reduxState = useSelector((state) => state.cart.items);
-  const [foods, setFoods] = useState([
-    {
-      image:
-        "https://b.zmtcdn.com/data/dish_photos/87c/153beb91af9f43e157f3d6fd6ea2587c.jpg?output-format=webp",
-      name: "Chilli Paneer Gravy",
-      price: "157.50",
-      rating: 4,
-      descript:
-        "Chicken NoodelsChicken Fried Rice+Chilli ChickenChicken Manchurian+Chilli PotatoHoney Chilli Potato+Chicken Chilli Garlic Momos [2 ... read more",
-      quantity: 1,
-    },
-    {
-      image:
-        "https://b.zmtcdn.com/data/dish_photos/87c/153beb91af9f43e157f3d6fd6ea2587c.jpg?output-format=webp",
-      name: "Chilli Paneer Gravy",
-      price: "157.50",
-      rating: 4,
-      descript:
-        "Chicken NoodelsChicken Fried Rice+Chilli ChickenChicken Manchurian+Chilli PotatoHoney Chilli Potato+Chicken Chilli Garlic Momos [2 ... read more",
-      quantity: 1,
-    },
-  ]);
+  const [info, setInfo] = useState({
+    totalItems: 0,
+    totalPrice: 0,
+  });
+
+  useEffect(() => {
+    if (reduxState?.length) {
+      const totalItems = reduxState
+        .map((item) => item.quantity)
+        .reduce((total, num) => total + Math.round(num), 0);
+      const totalPrice = reduxState
+        .map((item) => item.totalPrice*item.quantity)
+        .reduce((total, num) => total + num, 0);
+      setInfo({ totalItems, totalPrice });
+    }
+  }, [reduxState]);
 
   const toggleCart = () => setIsOpen((prev) => !prev);
   const closeCart = () => setIsOpen(false);
@@ -99,7 +93,7 @@ function CartContainer() {
               <hr className="my-2" />
 
               <div className="flex flex-col gap-2 md:px-20">
-                {reduxState.map((food ,index) => (
+                {reduxState.map((food, index) => (
                   <FoodItem key={index} {...food} />
                 ))}
               </div>
@@ -107,8 +101,8 @@ function CartContainer() {
           )}
 
           <div className="fixed w-full bg-white z-10 p-2 px-3 bottom-0  mx-auto lg:px-20">
-            <CartSM toggle={toggleCart} />
-            <CartLG toggle={toggleCart} />
+            <CartSM toggle={toggleCart} {...info} />
+            <CartLG toggle={toggleCart} {...info}/>
           </div>
         </div>
       )}
