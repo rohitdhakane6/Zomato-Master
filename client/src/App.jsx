@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,18 +10,26 @@ import Checkoutlayouthoc from "./HOC/Checkout.hoc";
 import HomePage from "./pages/HomePage";
 import CheckoutPage from "./pages/CheckoutPage";
 import Redirect from "./pages/Restaurant/Redirect";
+import GoogleAuth from "./pages/GoogleAuth.jsx";
 //Components
 import Overview from "./components/Restaurant/Overview";
 import Menu from "./components/Restaurant/Menu";
 import OrderOnline from "./components/Restaurant/OrderOnline";
 import Reviews from "./components/Restaurant/Reviews/Reviews";
 import Photos from "./components/Restaurant/Photos/Photos";
+import { useDispatch } from "react-redux";
+import { getSelf } from "./app/store";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getSelf());
+  }, [localStorage]);
   return (
     <>
       <Routes>
-          <Route path="/" element={<Navigate to="/delivery" />} />
+        <Route path="/" element={<Navigate to="/delivery" />} />
+        <Route path="/google" element={<GoogleAuth />} />
       </Routes>
 
       <HomeLayoutHOC path="/:type" exact component={HomePage} />

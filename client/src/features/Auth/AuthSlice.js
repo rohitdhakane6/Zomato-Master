@@ -1,14 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { getSelf, clerUser } from '../User/UserSlices';
 
 export const signInUser = createAsyncThunk('auth/signInUser', async (userData, { rejectWithValue }) => {
   try {
     const response = await axios.post('http://localhost:8080/auth/signin', { credintional: userData });
     const { token } = response.data;
-    console.log(response);
     localStorage.setItem('ZomatoUser', token);
-    await getSelf();
+    window.location.reload();
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response ? error.response.data : 'An error occurred');
@@ -20,7 +18,6 @@ export const signUpUser = createAsyncThunk('auth/signUpUser', async (userData, {
     const response = await axios.post('http://localhost:8080/auth/signup', { credintional: userData });
     const { token } = response.data;
     localStorage.setItem('ZomatoUser', token);
-    await getSelf();
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response ? error.response.data : 'An error occurred');
@@ -30,7 +27,6 @@ export const signUpUser = createAsyncThunk('auth/signUpUser', async (userData, {
 export const googleAuth = createAsyncThunk('auth/googleAuth', async (token) => {
   try {
     localStorage.setItem('ZomatoUser', token);
-    await getSelf();
   } catch (error) {
     throw error;
   }
@@ -38,8 +34,7 @@ export const googleAuth = createAsyncThunk('auth/googleAuth', async (token) => {
 
 export const signOutUser = createAsyncThunk('auth/signOutUser', async () => {
   localStorage.removeItem('ZomatoUser');
-  clerUser();
-  window.location.href = "https://localhost:8080";
+  window.location.href = "http://localhost:3000/";
   return {};
 });
 

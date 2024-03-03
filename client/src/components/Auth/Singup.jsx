@@ -49,7 +49,7 @@ export default function Signup({ isOpen, setIsOpen }) {
   };
 
   const googleSignup = () => {
-    window.location.href = "http://localhost:4000?auth/google";
+    window.location.href = "http://localhost:8080/auth/google";
   };
 
   return (

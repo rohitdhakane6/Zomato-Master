@@ -7,14 +7,14 @@ import Singup from "../Auth/Singup";
 import SingIn from "../Auth/SingIn";
 
 // redux
-// import { useSelector, useDispatch } from "react-redux";
-// import { signOut } from "../../redux/reducers/auth/auth.action";
+import { useDispatch, useSelector } from "react-redux";
+import { signOutUser } from "../../app/store";
 
 function MobileNav({ SignIn, SignUp }) {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const [user, setUser] = useState({});
-  // const reduxState = useSelector((globalState) => globalState.user.user.user);
-  // const dispatch = useDispatch();
+  // const [user, setUser] = useState({});
+  const user = useSelector((state) => state.user?.user?.user);
+  const dispatch = useDispatch();
 
   return (
     <div className="flex w-full items-center justify-between lg:hidden">
@@ -43,7 +43,7 @@ function MobileNav({ SignIn, SignUp }) {
             </div>
             {isDropDownOpen && (
               <div className="absolute shadow-lg py-3 -bottom-20 -right-4 w-full bg-white z-20 flex flex-col gap-2">
-                <button>Sign Out</button>
+                <button onClick={()=>(dispatch(signOutUser()))}>Sign Out</button>
               </div>
             )}
           </>
@@ -70,9 +70,9 @@ function MobileNav({ SignIn, SignUp }) {
 
 function LargeNav({ SignIn, SignUp }) {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const [user, setUser] = useState({});
-  // const reduxState = useSelector((globalState) => globalState.user.user.user);
-  // const dispatch = useDispatch();
+  // const [user, setUser] = useState({});
+  const user = useSelector((state) => state.user?.user?.user);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -119,7 +119,7 @@ function LargeNav({ SignIn, SignUp }) {
               </div>
               {isDropDownOpen && (
                 <div className="absolute shadow-lg py-3 -bottom-20 -right-4 w-full bg-white z-20 flex flex-col gap-2">
-                  <button>Sign Out</button>
+                  <button onClick={()=>(dispatch(signOutUser()))}>Sign Out</button>
                 </div>
               )}
             </div>
