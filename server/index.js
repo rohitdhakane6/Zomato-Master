@@ -9,7 +9,7 @@ import session from 'express-session';
 dotenv.config();
 
 //Routes
-import { ReviewRoute, UserRoute, authRoute, foodRoute, imageRoute, restaurantRoute, MenuRoute, FoodRoute } from "./controllers";
+import {ReviewRoute, UserRoute, authRoute,foodRoute,imageRoute, restaurantRoute ,MenuRoute, FoodRoute } from "./controllers";
 
 
 // Importing route handlers and Passport configuration
@@ -27,15 +27,15 @@ app.use(cors()); // Enable CORS for all routes
 
 // Configuring session middleware
 app.use(
-  session({
-    secret: 'your-secret-key', // Choose a strong and unique secret key
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: false, // Set to true if your site is served over HTTPS
-      maxAge: 24 * 60 * 60 * 1000, // Set the session to expire in 1 day (adjust as needed)
-    },
-  })
+    session({
+      secret: 'your-secret-key', // Choose a strong and unique secret key
+      resave: false,
+      saveUninitialized: true,
+      cookie: {
+        secure: false, // Set to true if your site is served over HTTPS
+        maxAge: 24 * 60 * 60 * 1000, // Set the session to expire in 1 day (adjust as needed)
+      },
+    })
 );
 
 // Initializing Passport middleware
@@ -46,31 +46,28 @@ googleAuthConfig(passport);
 configureJwtStrategy(passport);
 
 // Adding route handlers
-app.get('/', (req, res) => {
-  res.send( "Server Ping Successfully");
-})
 app.use("/auth", authRoute);
-app.use("/image", imageRoute);
-app.use("/restaurant", restaurantRoute);
-app.use("/food", foodRoute)
-app.use("/reviews", ReviewRoute)
-app.use("/user", UserRoute)
-app.use("/menu", MenuRoute)
-app.use("/food", FoodRoute)
+app.use("/image",imageRoute);
+app.use("/restaurant",restaurantRoute);
+app.use("/food",foodRoute)
+app.use("/reviews",ReviewRoute)
+app.use("/user",UserRoute)
+app.use("/menu",MenuRoute)
+app.use("/food",FoodRoute)
 
 
 // Mongoose setup
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {
-  // Setting strict mode for Mongoose queries
-  set("strictQuery", true);
+    // Setting strict mode for Mongoose queries
+    set("strictQuery", true);
 
-  // Connecting to MongoDB
-  connect(process.env.MONGO_URL)
-    .then(() => {
-      console.log(`Server listening on port ${PORT}`);
-    })
-    .catch((err) => {
-      console.error(`Error connecting to MongoDB: ${err}`);
-    });
+    // Connecting to MongoDB
+    connect(process.env.MONGO_URL)
+        .then(() => {
+            console.log(`Server listening on port ${PORT}`);
+        })
+        .catch((err) => {
+            console.error(`Error connecting to MongoDB: ${err}`);
+        });
 });
