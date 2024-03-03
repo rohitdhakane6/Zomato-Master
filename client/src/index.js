@@ -10,7 +10,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 if (localStorage.ZomatoUser) {
   const token =localStorage.ZomatoUser;
-  console.log(token);
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
 root.render(

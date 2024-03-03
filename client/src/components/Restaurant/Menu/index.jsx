@@ -16,19 +16,23 @@ function Menu() {
   useEffect(() => {
     const fetchMenuImages = async () => {
       try {
-        const data = await dispatch(fetchImageURL(restaurant.menuImages));
-        const images = data.payload.image.images.map(({ location }) => location);
-        setMenuImages((prev) => ({
-          ...prev,
-          images: images,
-        }));
+        if (restaurant.menuImages) {
+          const data = await dispatch(fetchImageURL(restaurant.menuImages));
+          const images = data.payload.image.images.map(
+            ({ location }) => location
+          );
+          setMenuImages((prev) => ({
+            ...prev,
+            images: images,
+          }));
+        }
       } catch (error) {
         console.error("Error fetching menu images:", error);
       }
     };
 
     fetchMenuImages();
-  }, [ ]);
+  }, [restaurant.menuImages]);
 
   const closeViewer = () => setIsMenuOpen(false);
   const openViewer = () => setIsMenuOpen(true);

@@ -22,8 +22,9 @@ function OrderOnline() {
   const restaurant = useSelector((state) => state.restaurant.restaurantdata);
   useEffect(() => {
     const fetchData = async () => {
-      if (restaurant) {
+      if (restaurant?.menu) {
         try {
+
           const response = await dispatch(getFoodList(restaurant?.menu));
         
           if (response.payload && response.payload.menus) {
@@ -38,7 +39,7 @@ function OrderOnline() {
     };
 
     fetchData();
-  }, [dispatch, restaurant]);
+  }, [ restaurant]);
 
   return (
     <>
