@@ -1,25 +1,75 @@
+// store.js
 import { configureStore } from '@reduxjs/toolkit';
-import restaurantReducer, { fetchRestaurants, fetchRestaurantByID, searchRestaurants } from "../features/resturant/restaurantSlice";
-import imageReducer, { fetchImageURL } from "../features/image/imageSlice";
-import ReviewSlice, { getReviews, postReview } from '../features/Reviews/ReviewSlice';
-import UserSlices, { getSelf, getUser, clerUser } from '../features/User/UserSlices';
-import FoodSlice ,{getFoodList,getfood} from '../features/Food/FoodSlice';
-import AuthSlice ,{signInUser,signOutUser,signUpUser ,googleAuth} from '../features/Auth/AuthSlice';
+import RestaurantReducer, { fetchRestaurants, fetchRestaurantByID, searchRestaurants } from "../features/resturant/restaurantSlice";
+import ImageReducer, { fetchImageURL } from "../features/image/imageSlice";
+import ReviewReducer, { getReviews, postReview } from '../features/Reviews/ReviewSlice';
+import UserReducer, { getSelf, getUser, clerUser } from '../features/User/UserSlices';
+import FoodReducer, { getFoodList, getfood } from '../features/Food/FoodSlice';
+import AuthReducer, { signInUser, signOutUser, signUpUser, googleAuth } from '../features/Auth/AuthSlice';
+import CartReducer, { addToCart, removeFromCart, incrementCartItem, decrementCartItem, clearCart } from '../features/Cart/cartSlice';
+
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('zomatocart');
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (error) {
+    console.error('Error loading cart state from local storage:', error);
+    return undefined;
+  }
+};
+
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('zomatocart', serializedState);
+  } catch (error) {
+    console.error('Error saving cart state to local storage:', error);
+  }
+};
+
+const preloadedState = {
+  cart: loadState(),
+};
 
 const store = configureStore({
   reducer: {
-    restaurant: restaurantReducer,
-    image: imageReducer,
-    review: ReviewSlice,
-    user:UserSlices,
-    food:FoodSlice,
-    auth:AuthSlice,
+    restaurant: RestaurantReducer,
+    image: ImageReducer,
+    review: ReviewReducer,
+    user: UserReducer,
+    food: FoodReducer,
+    auth: AuthReducer,
+    cart: CartReducer,
   },
+  preloadedState,
 });
 
-export { fetchRestaurants, fetchRestaurantByID, searchRestaurants };
-export { fetchImageURL, getReviews, postReview }
-export { getUser, getSelf, clerUser };
-export {getFoodList,getfood}
-export {signInUser,signOutUser,signUpUser,googleAuth}
+store.subscribe(() => {
+  saveState(store.getState().cart);
+});
+
+export {
+  fetchRestaurants, fetchRestaurantByID, searchRestaurants,
+  fetchImageURL,
+  getReviews,
+  postReview,
+  getUser,
+  getSelf,
+  clerUser,
+  getFoodList,
+  getfood,
+  signInUser,
+  signOutUser,
+  signUpUser,
+  googleAuth,
+  addToCart,
+  removeFromCart,
+  incrementCartItem,
+  decrementCartItem,
+  clearCart,
+};
+
 export default store;
