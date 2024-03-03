@@ -31,8 +31,8 @@ function Reviews() {
           <div className="md:hidden mb-4">
             <AddReviewCard />
           </div>
-          {reviews.map((review) => (
-            <ReviewCard {...review} />
+          {reviews.map((review,id) => (
+            <ReviewCard {...review} key={id}/>
           ))}
         </div>
         <aside

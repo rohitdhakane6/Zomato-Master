@@ -12,7 +12,8 @@ export const getReviews = createAsyncThunk("review/getReviews", async (resId) =>
 
 export const postReview = createAsyncThunk("review/postReview", async (reviewData) => {
   try {
-    const response = await axios.post(`http://localhost:8080/reviews/new`, reviewData);
+    const response = await axios.post(`http://localhost:8080/reviews/new`, {reviewData:reviewData});
+    console.log(response);
     return response.data;
   } catch (error) {
     throw error;

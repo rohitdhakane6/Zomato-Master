@@ -4,11 +4,11 @@ import Rating from "react-rating-stars-component";
 import { useParams } from "react-router-dom";
 
 // redux
-// import { useDispatch } from "react-redux";
-// import { postReview } from "../../../redux/reducers/review/review.action";
+import { useDispatch } from "react-redux";
+import { postReview } from "../../../app/store";
 
 export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [reviewData, setReviewData] = useState({
     subject: "",
     reviewText: "",
@@ -18,7 +18,6 @@ export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
   });
 
   const { id } = useParams();
-
   const handleChange = (e) => {
     setReviewData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -48,7 +47,7 @@ export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
   }
 
   const submit = () => {
-    // dispatch(postReview({ ...reviewData, restaurant: id }));
+    dispatch(postReview({ ...reviewData, restaurant: id }));
     setReviewData({
       subject: "",
       reviewText: "",
