@@ -1,9 +1,11 @@
 import React from "react";
 import { BsShieldLockFill } from "react-icons/bs";
+import useRazorpay from "react-razorpay";
 
 // components
 import FoodItem from "../components/cart/FoodItem";
 import AddressList from "../components/Checkout/AddressList.jsx";
+import { useSelector } from "react-redux";
 
 function CheckoutPage() {
   const address = [
@@ -20,29 +22,59 @@ function CheckoutPage() {
       address: "123 Main St",
     },
   ];
+  const foods = useSelector((state) => state.cart.items);
+  const user = useSelector((state) => state.user?.user?.user);
+  console.log(user);
+  //   {
+  //     "email": "rohitdhakane6@gmail.com",
+  //     "fullName": "Rohit Dhakane",
+  //     "address": {}
+  // }
 
-  const foods = [
-    {
+  const [Razorpay] = useRazorpay();
+
+  const handlePayment = async (params) => {
+    const options = {
+      key: "rzp_test_AapC3GhwdWLRPJ", // Enter the Key ID generated from the Dashboard
+      amount:
+        foods
+          .map((item) => item.totalPrice * item.quantity)
+          .reduce((total, num) => total + num, 0) * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: "INR",
+      name: "Zomato master",
+      description: "Food Order",
       image:
-        "https://b.zmtcdn.com/data/dish_photos/87c/153beb91af9f43e157f3d6fd6ea2587c.jpg?output-format=webp",
-      name: "Chilli Paneer Gravy",
-      price: "157.50",
-      rating: 4,
-      descript:
-        "Chicken NoodelsChicken Fried Rice+Chilli ChickenChicken Manchurian+Chilli PotatoHoney Chilli Potato+Chicken Chilli Garlic Momos [2 ... read more",
-      quantity: 1,
-    },
-    {
-      image:
-        "https://b.zmtcdn.com/data/dish_photos/87c/153beb91af9f43e157f3d6fd6ea2587c.jpg?output-format=webp",
-      name: "Chilli Paan",
-      price: "157.50",
-      rating: 4,
-      descript:
-        "Chicken NoodelsChicken Fried Rice+Chilli ChickenChicken Manchurian+Chilli PotatoHoney Chilli Potato+Chicken Chilli Garlic Momos [2 ... read more",
-      quantity: 3,
-    },
-  ];
+        "https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png",
+      handler: function (response) {
+        console.log(response);
+        alert(response.razorpay_payment_id);
+      },
+      prefill: {
+        name: user.fullName,
+        email: user.email,
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#e01d19",
+      },
+    };
+
+    const rzp1 = new Razorpay(options);
+
+    // rzp1.on("payment.failed", function (response) {
+    //   alert(response.error.code);
+    //   alert(response.error.description);
+    //   alert(response.error.source);
+    //   alert(response.error.step);
+    //   alert(response.error.reason);
+    //   alert(response.error.metadata.order_id);
+    //   alert(response.error.metadata.payment_id);
+    // });
+
+    rzp1.open();
+  };
 
   return (
     <div className="my-3 flex flex-col gap-3 items-center">
@@ -65,7 +97,10 @@ function CheckoutPage() {
             <AddressList address={address} />
           </div>
         </div>
-        <button className="flex items-center gap-2 justify-center my-4 md:my-8 w-full px-4 md:w-4/5 h-14 text-white font-medium text-lg bg-zomato-400 rounded-lg">
+        <button
+          onClick={handlePayment}
+          className="flex items-center gap-2 justify-center my-4 md:my-8 w-full px-4 md:w-4/5 h-14 text-white font-medium text-lg bg-zomato-400 rounded-lg"
+        >
           Pay Securely <BsShieldLockFill />
         </button>
       </div>
