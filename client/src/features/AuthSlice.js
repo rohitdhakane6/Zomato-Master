@@ -34,8 +34,8 @@ export const googleAuth = createAsyncThunk('auth/googleAuth', async (token) => {
 
 export const signOutUser = createAsyncThunk('auth/signOutUser', async () => {
   localStorage.removeItem('ZomatoUser');
-  window.location.href = "http://localhost:3000/";
-  return {};
+  window.location.href = process.env.REACT_APP_CLIENT_BASEURL;
+     return {};
 });
 
 const initialState = {
