@@ -3,7 +3,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import { TiStarFullOutline } from "react-icons/ti";
 import { useDispatch } from "react-redux";
-import { getUser } from "../../../features/User/UserSlices";
+import { getUser } from "../../../app/store";
 // Extend dayjs with the relativeTime plugin
 dayjs.extend(relativeTime);
 

@@ -4,7 +4,7 @@ import axios from 'axios';
 // Async action creators using createAsyncThunk
 export const fetchRestaurants = createAsyncThunk('restaurant/fetchRestaurant', async (city) => {
   try {
-    const response = await axios.get(`http://localhost:8080/restaurant/?city=${city}`);
+    const response = await axios.get(`restaurant/?city=${city}`);
     return response.data; // Assuming the response has a 'restaurants' property
   } catch (error) {
     throw error;
@@ -13,7 +13,7 @@ export const fetchRestaurants = createAsyncThunk('restaurant/fetchRestaurant', a
 
 export const fetchRestaurantByID = createAsyncThunk('restaurant/fetchRestaurantByID', async (_id) => {
   try {
-    const response = await axios.get(`http://localhost:8080/restaurant/${_id}`);
+    const response = await axios.get(`restaurant/${_id}`);
     return response.data.restaurant; // Assuming the response has a 'restaurant' property
   } catch (error) {
     throw error;
@@ -22,7 +22,7 @@ export const fetchRestaurantByID = createAsyncThunk('restaurant/fetchRestaurantB
 
 export const searchRestaurants = createAsyncThunk('restaurant/searchRestaurants', async (searchString) => {
   try {
-    const response = await axios.get(`http://localhost:8080/restaurant/search/${searchString}`);
+    const response = await axios.get(`restaurant/search/${searchString}`);
     return response.data; // Assuming the response has a 'restaurants' property
   } catch (error) {
     throw error;

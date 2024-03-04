@@ -1,12 +1,12 @@
 // store.js
 import { configureStore } from '@reduxjs/toolkit';
-import RestaurantReducer, { fetchRestaurants, fetchRestaurantByID, searchRestaurants } from "../features/resturant/restaurantSlice";
-import ImageReducer, { fetchImageURL } from "../features/image/imageSlice";
-import ReviewReducer, { getReviews, postReview } from '../features/Reviews/ReviewSlice';
-import UserReducer, { getSelf, getUser, clerUser } from '../features/User/UserSlices';
-import FoodReducer, { getFoodList, getfood } from '../features/Food/FoodSlice';
-import AuthReducer, { signInUser, signOutUser, signUpUser, googleAuth } from '../features/Auth/AuthSlice';
-import CartReducer, { addToCart, removeFromCart, incrementCartItem, decrementCartItem, clearCart } from '../features/Cart/cartSlice';
+import RestaurantReducer, { fetchRestaurants, fetchRestaurantByID, searchRestaurants } from "../features/restaurantSlice";
+import ImageReducer, { fetchImageURL } from "../features/imageSlice";
+import ReviewReducer, { getReviews, postReview } from '../features/ReviewSlice';
+import UserReducer, { getSelf, getUser, clerUser } from '../features/UserSlices';
+import FoodReducer, { getFoodList, getfood } from '../features/FoodSlice';
+import AuthReducer, { signInUser, signOutUser, signUpUser, googleAuth } from '../features/AuthSlice';
+import CartReducer, { addToCart, removeFromCart, incrementCartItem, decrementCartItem, clearCart } from '../features/cartSlice';
 
 const loadState = () => {
   try {

@@ -4,7 +4,7 @@ import axios from 'axios';
 // Async action creators using createAsyncThunk
 export const fetchImageURL = createAsyncThunk('image/fetchImageURL', async (_id) => {
   try {
-    const response = await axios.get(`http://localhost:8080/image/${_id}`);
+    const response = await axios.get(`image/${_id}`);
     return response.data;
   } catch (error) {
     throw error;

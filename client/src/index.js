@@ -12,6 +12,7 @@ if (localStorage.ZomatoUser) {
   const token =localStorage.ZomatoUser;
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
+axios.defaults.baseURL = 'http://localhost:8080/';
 root.render(
   <React.StrictMode>
     <Provider store={store}>

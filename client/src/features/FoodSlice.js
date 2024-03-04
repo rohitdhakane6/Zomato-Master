@@ -4,7 +4,7 @@ import axios from 'axios';
 // Async action creators using createAsyncThunk
 export const getFoodList = createAsyncThunk('food/foodlist', async (_id) => {
     try {
-        const response = await axios.get(`http://localhost:8080/menu/list/${_id}`);
+        const response = await axios.get(`menu/list/${_id}`);
         return response.data;
     } catch (error) {
         throw error;
@@ -13,7 +13,7 @@ export const getFoodList = createAsyncThunk('food/foodlist', async (_id) => {
 
 export const getfood = createAsyncThunk('fodd/food', async (_id) => {
     try {
-        const response = await axios.get(`http://localhost:8080/food/${_id}`);
+        const response = await axios.get(`food/${_id}`);
         return response.data.foods;
     } catch (error) {
         throw error;

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const signInUser = createAsyncThunk('auth/signInUser', async (userData, { rejectWithValue }) => {
   try {
-    const response = await axios.post('http://localhost:8080/auth/signin', { credintional: userData });
+    const response = await axios.post('auth/signin', { credintional: userData });
     const { token } = response.data;
     localStorage.setItem('ZomatoUser', token);
     window.location.reload();
@@ -15,7 +15,7 @@ export const signInUser = createAsyncThunk('auth/signInUser', async (userData, {
 
 export const signUpUser = createAsyncThunk('auth/signUpUser', async (userData, { rejectWithValue }) => {
   try {
-    const response = await axios.post('http://localhost:8080/auth/signup', { credintional: userData });
+    const response = await axios.post('auth/signup', { credintional: userData });
     const { token } = response.data;
     localStorage.setItem('ZomatoUser', token);
     return response.data;

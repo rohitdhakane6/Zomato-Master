@@ -3,7 +3,7 @@ import axios from "axios"
 
 export const getUser = createAsyncThunk("User/GetUSer", async (Id) => {
     try {
-        const response = await axios.get(`http://localhost:8080/user/${Id}`);
+        const response = await axios.get(`user/${Id}`);
         return response.data;
     } catch (error) {
         throw error;
@@ -12,7 +12,7 @@ export const getUser = createAsyncThunk("User/GetUSer", async (Id) => {
 
 export const getSelf = createAsyncThunk("User/getSelf", async (Id) => {
     try {
-        const response = await axios.get(`http://localhost:8080/user`);
+        const response = await axios.get(`user`);
         return response.data;
     } catch (error) {
         throw error;
