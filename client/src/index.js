@@ -13,7 +13,6 @@ if (localStorage.ZomatoUser) {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_BASEURL;
-console.log(process.env.REACT_APP_SERVER_BASEURL);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
