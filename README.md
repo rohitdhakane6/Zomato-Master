@@ -5,7 +5,7 @@ Zomato Clone is a web application built using the MERN (MongoDB, Express.js, Rea
 ## Screenshots
 ![Home Page](https://github.com/rohitdhakane6/Zomato-Master/assets/109848812/bb6f6428-be02-4b5a-b5af-73b01932a2be)
 ![Resturnt Page](https://github.com/rohitdhakane6/Zomato-Master/assets/109848812/a1ec0890-11a2-4661-8a7b-cc006f8e7cde)
-
+<img src="[drawing.jpg](https://github.com/rohitdhakane6/Zomato-Master/assets/109848812/bb6f6428-be02-4b5a-b5af-73b01932a2be)" alt="drawing" style="width:200px;"/>
 ## Demo
 
 Insert gif or link to demo
