@@ -1,13 +1,11 @@
 Certainly! Below is the complete Markdown code formatted for easy copying:
 
-```markdown
 # MERN Stack Application
 
 This is a basic structure for a MERN (MongoDB, Express.js, React.js, Node.js) stack application.
 
 ## Project Structure
 
-```
 project-root/
 │
 ├── client/                 # Frontend (React.js)
@@ -29,7 +27,6 @@ project-root/
 │   └── server.js           # Entry point for the Node.js server
 │
 └── .gitignore              # Git ignore file
-```
 
 ## Installation
 
