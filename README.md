@@ -1,108 +1,44 @@
-Certainly! Below is the complete Markdown code formatted for easy copying:
+# Zomato Clone
 
-# MERN Stack Application
-
-This is a basic structure for a MERN (MongoDB, Express.js, React.js, Node.js) stack application.
-
-## Project Structure
-
-project-root/
-│
-├── client/                 # Frontend (React.js)
-│   ├── public/             # Static assets
-│   └── src/                # React components and logic
-│       ├── components/     # Reusable UI components
-│       ├── pages/          # Main application pages
-│       ├── App.js          # Main React component
-│       └── index.js        # Entry point for React app
-│
-├── server/                 # Backend (Express.js + Node.js)
-│   ├── controllers/        # Route handlers
-│   ├── models/             # Database models (Mongoose)
-│   ├── routes/             # API endpoints
-│   ├── config/             # Configuration files
-│   ├── middleware/         # Custom middleware
-│   ├── services/           # Business logic services
-│   ├── app.js              # Express application setup
-│   └── server.js           # Entry point for the Node.js server
-│
-└── .gitignore              # Git ignore file
-
-## Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone <repository-url>
-   ```
-
-2. Install dependencies:
-
-   - For the server:
-
-   ```bash
-   cd server
-   npm install
-   ```
-
-   - For the client:
-
-   ```bash
-   cd client
-   npm install
-   ```
-
-## Configuration
-
-1. MongoDB Setup:
-
-   - Make sure MongoDB is installed and running.
-   - Update MongoDB connection URI in `server/config/db.js`.
-
-2. Environment Variables:
-
-   - Create a `.env` file in the `server` directory.
-   - Define the following environment variables:
-
-     ```
-     PORT=3001
-     DATABASE_URL=mongodb://localhost:27017/your_database_name
-     ```
-
-## Running the Application
-
-1. Start the server:
-
-   ```bash
-   cd server
-   npm start
-   ```
-
-2. Start the client:
-
-   ```bash
-   cd client
-   npm start
-   ```
-
-3. Access the application in your browser at `http://localhost:3000`.
-
-## Deployment
-
-- For deployment, build the React app and serve the built files statically using Express.
-- Set appropriate environment variables for production in the hosting environment.
+Zomato Clone is a web application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It aims to replicate the functionality of the Zomato platform, allowing users to explore restaurants, view menus, and place orders.
 
 ## Screenshots
+![Home Page](https://github.com/rohitdhakane6/Zomato-Master/assets/109848812/bb6f6428-be02-4b5a-b5af-73b01932a2be)
+![Resturnt Page](https://github.com/rohitdhakane6/Zomato-Master/assets/109848812/a1ec0890-11a2-4661-8a7b-cc006f8e7cde)
 
-<!-- Add screenshots of your application -->
+## Demo
 
-## Live Link
+Insert gif or link to demo
 
-<!-- Add a link to your live application -->
 
-## Contributing
+## Environment Variables
 
-Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md).
+To run this project, you will need to add the following environment variables to your .env file
+
+## Client
+Create a .env file in the Client directory with the following
+``` bash
+REACT_APP_SERVER_BASEURL=
+REACT_APP_CLIENT_BASEURL=
+```
+## server
+Create a .env file in the server directory with the following
+ ``` bash
+MONGO_URL=
+PORT="8080"
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+AWS_S3_ACCESS_KEY=
+AWS_S3_SECRET_KEY=
 ```
 
-You can copy and paste this Markdown code into a `.md` file for your documentation.
+
+## Authors
+
+- [@rohitdhakane6](https://github.com/rohitdhakane6)
+
+
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rohit-dhakane/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/RohitDhakane_)
+
