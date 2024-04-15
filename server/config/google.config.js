@@ -1,5 +1,5 @@
 import googleOAuth from "passport-google-oauth20";
-import User from "../model/user";
+import User from "../model/User";
 
 const GoogleStrategy = googleOAuth.Strategy;
 import dotenv from "dotenv";

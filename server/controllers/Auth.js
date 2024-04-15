@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport"
-import User from "../model/user";
+import User from "../model/User.js";
 
 const router = Router();
 

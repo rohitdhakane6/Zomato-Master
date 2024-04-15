@@ -1,5 +1,5 @@
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import User from "../model/user"
+import User from "../model/User"
   
 const configureJwtStrategy = (passport) => {
     // JWT options
