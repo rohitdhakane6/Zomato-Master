@@ -1,69 +1,25 @@
-// Importing necessary packages
-import express, { json } from "express";
-import helmet from "helmet";
+import express from "express";
 import { set, connect } from "mongoose";
 import dotenv from "dotenv";
-import cors from "cors";
-import passport from 'passport';
-import session from 'express-session';
+import { setupMiddleware } from "./middleware";
+import { setupPassport } from "./config/passport.config";
+import router from "./Routes";
+
 dotenv.config();
 
-//Routes
-import {ReviewRoute, UserRoute, authRoute,foodRoute,imageRoute, restaurantRoute ,MenuRoute, FoodRoute } from "./controllers";
+const PORT = process.env.PORT || 6001;
+const MONGO_URL = process.env.MONGO_URL;
 
-
-// Importing route handlers and Passport configuration
-import googleAuthConfig from "./config/google.config"
-import configureJwtStrategy from "./config/route.config"
-
-
-// Creating an Express app
 const app = express();
 
-// Adding middleware packages
-app.use(json()); // Parse incoming JSON requests
-app.use(helmet()); // Set security-related HTTP headers
-app.use(cors()); // Enable CORS for all routes
+setupMiddleware(app);
+setupPassport(app);
 
-// Configuring session middleware
-app.use(
-    session({
-      secret: 'your-secret-key', // Choose a strong and unique secret key
-      resave: false,
-      saveUninitialized: true,
-      cookie: {
-        secure: false, // Set to true if your site is served over HTTPS
-        maxAge: 24 * 60 * 60 * 1000, // Set the session to expire in 1 day (adjust as needed)
-      },
-    })
-);
+app.use(router);
 
-// Initializing Passport middleware
-app.use(passport.initialize());
-
-// Configuring Passport with Google OAuth
-googleAuthConfig(passport);
-configureJwtStrategy(passport);
-
-// Adding route handlers
-app.use("/auth", authRoute);
-app.use("/image",imageRoute);
-app.use("/restaurant",restaurantRoute);
-app.use("/food",foodRoute)
-app.use("/reviews",ReviewRoute)
-app.use("/user",UserRoute)
-app.use("/menu",MenuRoute)
-app.use("/food",FoodRoute)
-
-
-// Mongoose setup
-const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {
-    // Setting strict mode for Mongoose queries
     set("strictQuery", true);
-
-    // Connecting to MongoDB
-    connect(process.env.MONGO_URL)
+    connect(MONGO_URL)
         .then(() => {
             console.log(`Server listening on port ${PORT}`);
         })
