@@ -63,7 +63,7 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
     // Successful authentication, redirect to the home page or any other route
-    return res.redirect(`${process.env.BASE_URL}/google?token=${req.session.passport.user.token}`);
+    return res.redirect(`${process.env.FRONT_END_URL}/google?token=${req.session.passport.user.token}`);
   }
 );
 export default router;
