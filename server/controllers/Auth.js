@@ -1,7 +1,6 @@
 import { Router } from "express";
 import passport from "passport"
 import User from "../model/User.js";
-
 const router = Router();
 
 router.post("/signup", async (req, res) => {
@@ -64,7 +63,7 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
     // Successful authentication, redirect to the home page or any other route
-    return res.redirect(`http://localhost:3000/google?token=${req.session.passport.user.token}`);
+    return res.redirect(`${process.env.BASE_URL}/google?token=${req.session.passport.user.token}`);
   }
 );
 export default router;
