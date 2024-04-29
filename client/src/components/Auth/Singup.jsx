@@ -49,7 +49,8 @@ export default function Signup({ isOpen, setIsOpen }) {
   };
 
   const googleSignup = () => {
-    window.location.href = "http://localhost:8080/auth/google";
+    window.location.href = `${process.env.REACT_APP_SERVER_BASEURL}/auth/google`;
+
   };
 
   return (

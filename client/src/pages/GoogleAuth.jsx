@@ -12,7 +12,7 @@ function GoogleAuth() {
   useEffect(() => {
     if (token) {
       dispatch(googleAuth(token)).then(
-        () => (window.location.href = process.env.REACT_APP_CLIENT_BASEURL)
+        () => (window.location.href =window.location.origin)
       );
     }
   }, [token]);
